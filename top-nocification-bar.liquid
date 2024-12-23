@@ -1,0 +1,193 @@
+{%- if section.settings.topbar_notification_enable -%}
+<section class="top-notification-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="notification-block">
+          <ul class="notification-entry">
+            {% if section.settings.offer_text != '' %}
+            <li class="notify-wrap offer-text">
+              <div class="text-wrap">{{ section.settings.offer_text }}</div>
+            </li>
+            {% endif %}
+            <li class="notify-wrap custom-link">
+              <ul class="custom-link-ul">
+                {% if section.settings.custom_link_1 != '' %}
+                <li class="custom-link-li">
+                  <div class="link">{{ section.settings.custom_link_1 }}</div>
+                </li>
+                {% endif %}
+                {% if section.settings.custom_link_2 != '' %}
+                <li class="custom-link-li">
+                  <div class="link">{{ section.settings.custom_link_2 }}</div>
+                </li>
+                {% endif %}
+                {% if section.settings.custom_link_3 != '' %}
+                <li class="custom-link-li">
+                  <div class="link">{{ section.settings.custom_link_3 }}</div>
+                </li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Topbar notification",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Show topbar notification"
+    },
+    {
+      "type": "checkbox",
+      "id": "topbar_notification_enable",
+      "label": "Show topbar notification",
+      "default": false
+    },
+    {
+      "type": "paragraph",
+      "content": "Notification Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Section background color"
+    },
+    {
+      "type": "color",
+      "id": "topbar_notification_bg_color",
+      "label": "Section background color",
+      "default": "#31AF68"
+    },
+    {
+      "type": "color",
+      "id": "topbar_notification_txt_color",
+      "label": "Section text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Offer Text"
+    },
+    {
+      "type": "richtext",
+      "id": "offer_text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Custom Link"
+    },
+    {
+      "type": "richtext",
+      "id": "custom_link_1",
+      "label": "Link 1"
+    },
+    {
+      "type": "richtext",
+      "id": "custom_link_2",
+      "label": "Link 2"
+    },
+    {
+      "type": "richtext",
+      "id": "custom_link_3",
+      "label": "Link 3"
+    }
+  ]
+}
+{% endschema %}
+<style>
+.top-notification-bar {
+  position: relative;
+  padding-top: {{ section.settings.section_padding_top }}px;
+  padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  background-color: {{ section.settings.topbar_notification_bg_color }};
+  z-index: 1;
+}
+.top-notification-bar .notification-block ul.notification-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 991px) {
+  .top-notification-bar .notification-block ul.notification-entry {
+    justify-content: center;
+  }
+  .top-notification-bar .notification-block ul.notification-entry li.notify-wrap {
+    margin-top: 5px;
+  }
+  .top-notification-bar .notification-block ul.notification-entry li.notify-wrap:first-child {
+    margin-top: 0px;
+  }
+}
+@media (max-width: 479px) {
+  .top-notification-bar .notification-block ul.notification-entry li.notify-wrap.custom-link {
+    display: none;
+  }
+}
+
+/* offer text css */
+.offer-text {
+  text-align: center;
+}
+.offer-text .text-wrap p,
+.offer-text .text-wrap p a {
+  color: {{ section.settings.topbar_notification_txt_color }};
+}
+.offer-text .text-wrap p a {
+  font-weight: var(--font-subtitle-weight-body);
+  border-bottom: 1px solid;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.offer-text .text-wrap p a:hover {
+  opacity: 0.7;
+}
+
+/* custom link css */
+.custom-link ul.custom-link-ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.custom-link ul.custom-link-ul li.custom-link-li {
+  margin-left: 30px;
+}
+.custom-link ul.custom-link-ul li.custom-link-li:first-child {
+  margin-left: 0px;
+}
+.custom-link ul.custom-link-ul li.custom-link-li .link p,
+.custom-link ul.custom-link-ul li.custom-link-li .link p a {
+  color: {{ section.settings.topbar_notification_txt_color }};
+}
+.custom-link ul.custom-link-ul li.custom-link-li .link p a:hover {
+  opacity: 0.7;
+}
+</style>

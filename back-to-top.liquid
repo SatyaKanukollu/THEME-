@@ -1,0 +1,49 @@
+<a href="javascript:void(0)" id="top" class="scroll">
+    <span><i class="ri-arrow-up-line"></i></span>
+</a>
+<style>
+a.scroll {
+    display: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+    position: fixed;
+    bottom: 90px;
+    {%- if settings.enable_rtl -%}
+    left: 30px;
+    {%- else -%}
+    right: 30px;
+    {%- endif -%}
+    z-index: 9;
+    border-radius: 0;
+    transition: 0.3s ease-in-out;
+    background-color: var(--font-color-primary);
+    border-radius: var(--sti-border-radius);
+}
+a.scroll:hover{
+    color: #ffffff;
+    background-color: var(--font-color-secondary);
+}
+a.scroll span {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media(max-width: 767px){
+    a.scroll {
+        {%- if settings.enable_rtl -%}
+        left: 15px;
+        {%- else -%}
+        right: 15px;
+        {%- endif -%}
+    }
+    a.scroll span {
+        font-size: 12px;
+        height: 30px;
+        width: 30px;
+    }
+}
+</style>

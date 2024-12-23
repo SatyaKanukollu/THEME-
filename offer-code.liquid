@@ -1,0 +1,332 @@
+<section class="offer-code-area" {% if section.settings.section_bg_image_enable %} style="background-image: url('{% if section.settings.section_bg_image %}{{ section.settings.section_bg_image | image_url }}{% else %}https://dummyimage.com/1920x420/232323/FFFFFF{% endif %}');"{% endif %}>
+  <div class="container">
+		<div class="row">
+			<div class="col">
+        {% if section.settings.section_title != '' %}
+        <div class="section-capture">
+          <div class="section-title">
+            <h2>{{ section.settings.section_title }}</h2>
+          </div>
+        </div>
+        {% endif %}
+				<div class="offer-code-wrap">	
+          <ul class="offer-code-ul">
+            {% for block in section.blocks %}
+            <li class="offer-code-li">
+              <div class="offer-code-main">
+                <div class="code-heading">
+                  {% if block.settings.offer_code_title != '' %}
+                  <h4 class="title">{{ block.settings.offer_code_title }}</h4>
+                  {% endif %}
+                  {% if block.settings.offer_code_desc != '' %}
+                  <p class="desc">{{ block.settings.offer_code_desc }}</p>
+                  {% endif %}
+                </div>
+                {% if block.settings.offer_code_url_text != '' %}
+                <div class="code-link-wrap">
+                  <a href="{{ block.settings.offer_code_url }}" class="code-link">
+                    <span class="text">{{ block.settings.offer_code_url_text }}</span>
+                    <span class="icon"><i class="feather-arrow-up-right"></i></span>
+                  </a>
+                </div>
+                {% endif %}
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% schema %}
+{
+  "name": "Offer Code",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "paragraph",
+      "content": "Desktop / Laptop"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "paragraph",
+      "content": "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_ip",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_ip",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Section Background Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bg_image_enable",
+      "label": "Show Background Image",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "section_bg_image",
+      "label": "Background Image",
+      "info": "Recommended Size: 1920 x 420px"
+    },
+    {
+      "type": "header",
+      "content": "Section Background Color"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bg_color_enable",
+      "label": "Show Backgorund Color",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background Color",
+      "default": "#F7F7F7"
+    },
+    {
+      "type": "header",
+      "content": "Section title"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Hottest deal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "offer_code_item",
+      "name": "Offer code item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "offer_code_title",
+          "label": "Title",
+          "default": "Hurry up!"
+        },
+        {
+          "type": "text",
+          "id": "offer_code_desc",
+          "label": "Description",
+          "default": "Winter sale kitchen"
+        },
+        {
+          "type": "text",
+          "id": "offer_code_url_text",
+          "label": "Link title",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "offer_code_url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offer code",
+      "category": "Offer code"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+	.offer-code-area {
+    position: relative;
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+		{% if section.settings.section_bg_image_enable %}
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		{% endif %}
+    {% if section.settings.section_bg_color_enable %}
+    background-color: {{ section.settings.section_bg_color }};
+    {% endif %}
+  }
+  @media (max-width: 1199px) {
+    .offer-code-area {
+      padding-top: {{ section.settings.section_padding_top_ip }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ip }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .offer-code-area {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -30px;
+    {%- if settings.enable_rtl -%}
+    margin-right: -30px;
+    {%- else -%}
+    margin-left: -30px;
+    {%- endif -%}
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li {
+    position: relative;
+    width: calc(25% - 30px);
+    margin-top: 30px;
+    {%- if settings.enable_rtl -%}
+    margin-right: 30px;
+    {%- else -%}
+    margin-left: 30px;
+    {%- endif -%}
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li .offer-code-main {
+    padding: 23px 30px 21px 30px;
+    border: 1px dashed var(--theme-border-color);
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li .offer-code-main .code-heading {
+    text-align: center;
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li .offer-code-main .code-heading h4.title {
+    font-size: var(--font-size-subtitle-body);
+    font-weight: var(--font-subtitle-weight-body);
+    text-transform: uppercase;
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li .offer-code-main .code-link-wrap {
+    background-color: var(--font-color-primary);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+    -o-transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+    transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li:hover .offer-code-main .code-link-wrap {
+    opacity: 1;
+    visibility: visible;
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li .offer-code-main a.code-link {
+    color: #FFFFFF;
+    width: fit-content;
+    margin: 0 auto;
+    text-transform: uppercase;
+    font-weight: var(--font-subtitle-weight-body);
+    line-height: 1;
+    border-bottom: 1px solid;
+  }
+  .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li .offer-code-main a.code-link span.icon {
+    font-size: 18px;
+    {%- if settings.enable_rtl -%}
+    padding-right: 5px;
+    {%- else -%}
+    padding-left: 5px;
+    {%- endif -%}
+  }
+	@media (max-width: 1199px) {
+    .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li {
+      width: calc(50% - 30px);
+    }
+	}
+	@media (max-width: 767px) {
+    .offer-code-area .offer-code-wrap ul.offer-code-ul {
+      {%- if settings.enable_rtl -%}
+      margin-right: -12px;
+      {%- else -%}
+      margin-left: -12px;
+      {%- endif -%}
+    }
+    .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li {
+      width: calc(50% - 12px);
+      {%- if settings.enable_rtl -%}
+      margin-right: 12px;
+      {%- else -%}
+      margin-left: 12px;
+      {%- endif -%}
+    }
+    .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li .offer-code-main {
+      padding: 23px 12px 21px 12px;
+    }
+	}
+	@media (max-width: 479px) {
+    .offer-code-area .offer-code-wrap ul.offer-code-ul li.offer-code-li {
+      width: calc(1000% - 12px);
+    }
+	}
+</style>
